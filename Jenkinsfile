@@ -1,30 +1,41 @@
-#!groovy
+pipeline {
+   agent any
 
-node {
-    currentBuild.result = "SUCCESS"
-
-    try {
-
-       stage('Checkout'){
-
-          checkout scm
-       }
-
-       stage('Compiling'){
-
-          bat 'mvn install'
-       }
-	   
-      stage('Sonar') {
-                    //add stage sonar
-                    bat 'mvn sonar:sonar'
+   stages {
+       stage(‘Compile Stage’) {
+           steps {
+               echo ‘Comple Stage starts...’
+                withMaven(maven : ‘maven_3_5_2’){
+                 sh ‘mvn clean compile’
+                echo ‘Comple Stage ends...’
                 }
-       
-    }
-    catch (err) {
-
-        
-
-        throw err
-    }
+           }
+       }
+       stage(‘Testing Stage’) {
+           steps {
+               echo ‘Testing Stage starts...’
+                withMaven(maven : ‘maven_3_5_2’){
+                 sh ‘mvn test’
+                echo ‘Testing Stage ends...’
+                }
+           }
+       }
+       stage(‘Install Stage’) {
+           steps {
+               echo ‘Install Stage starts...’
+                withMaven(maven : ‘maven_3_5_2’){
+                 sh ‘mvn install’
+                echo ‘Install Stage ends...’
+                }
+           }
+       }
+    
+       stage(‘SonarQube Scanner Stage’) {
+           steps {
+               echo ‘Deploymnet Stage starts...’
+                 sh ‘mvn sonar:sonar’
+                echo ‘Deploymnet Stage ends...’
+           }
+       }
+   }
 }
