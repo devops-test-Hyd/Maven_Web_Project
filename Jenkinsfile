@@ -9,31 +9,13 @@ pipeline {
 
            steps {
 
-               echo 'Comple Stage starts...’
+               echo 'Comple Stage starts...'
 
-                withMaven(maven : 'maven_3_5_2’){
+                withMaven(maven : 'maven_3_5_2'){
 
-                sh 'mvn clean compile’
+                sh 'mvn clean compile'
 
-                echo 'Comple Stage ends...’
-
-                }
-
-           }
-
-       }
-
-       stage('Testing Stage’) {
-
-           steps {
-
-               echo 'Testing Stage starts...’
-
-                withMaven(maven : 'maven_3_5_2’){
-
-                 sh 'mvn test’
-
-                echo 'Testing Stage ends...’
+                echo 'Comple Stage ends...'
 
                 }
 
@@ -41,17 +23,35 @@ pipeline {
 
        }
 
-       stage('Install Stage’) {
+       stage('Testing Stage') {
 
            steps {
 
-               echo 'Install Stage starts...’
+               echo 'Testing Stage starts...'
 
-                withMaven(maven : 'maven_3_5_2’){
+                withMaven(maven : 'maven_3_5_2'){
 
-                 sh 'mvn install’
+                 sh 'mvn test'
 
-                echo 'Install Stage ends...’
+                echo 'Testing Stage ends...'
+
+                }
+
+           }
+
+       }
+
+       stage('Install Stage') {
+
+           steps {
+
+               echo 'Install Stage starts...'
+
+                withMaven(maven : 'maven_3_5_2'){
+
+                 sh 'mvn install'
+
+                echo 'Install Stage ends...'
 
                 }
 
