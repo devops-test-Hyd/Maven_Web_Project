@@ -2,39 +2,39 @@ pipeline {
    agent any
 
    stages {
-       stage(‘Compile Stage’) {
+       stage('Compile Stage') {
            steps {
-               echo ‘Comple Stage starts...’
-                withMaven(maven : ‘maven_3_5_2’){
-                 sh ‘mvn clean compile’
-                echo ‘Comple Stage ends...’
+               echo 'Comple Stage starts...’
+                withMaven(maven : 'maven_3_5_2’){
+                 sh 'mvn clean compile’
+                echo 'Comple Stage ends...’
                 }
            }
        }
-       stage(‘Testing Stage’) {
+       stage('Testing Stage’) {
            steps {
-               echo ‘Testing Stage starts...’
-                withMaven(maven : ‘maven_3_5_2’){
-                 sh ‘mvn test’
-                echo ‘Testing Stage ends...’
+               echo 'Testing Stage starts...’
+                withMaven(maven : 'maven_3_5_2’){
+                 sh 'mvn test’
+                echo 'Testing Stage ends...’
                 }
            }
        }
-       stage(‘Install Stage’) {
+       stage('Install Stage’) {
            steps {
-               echo ‘Install Stage starts...’
-                withMaven(maven : ‘maven_3_5_2’){
-                 sh ‘mvn install’
-                echo ‘Install Stage ends...’
+               echo 'Install Stage starts...’
+                withMaven(maven : 'maven_3_5_2’){
+                 sh 'mvn install’
+                echo 'Install Stage ends...’
                 }
            }
        }
     
-       stage(‘SonarQube Scanner Stage’) {
+       stage('SonarQube Scanner Stage’) {
            steps {
-               echo ‘Deploymnet Stage starts...’
-                 sh ‘mvn sonar:sonar’
-                echo ‘Deploymnet Stage ends...’
+               echo 'Deploymnet Stage starts...’
+                 sh 'mvn sonar:sonar’
+                echo 'Deploymnet Stage ends...’
            }
        }
    }
