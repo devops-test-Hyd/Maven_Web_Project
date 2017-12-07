@@ -30,12 +30,6 @@ pipeline {
            }
        }
     
-       stage('SonarQube Scanner Stage’) {
-           steps {
-               echo 'Deploymnet Stage starts...’
-                 sh 'mvn sonar:sonar’
-                echo 'Deploymnet Stage ends...’
-           }
-       }
+       
    }
 }
